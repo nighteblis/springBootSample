@@ -1,8 +1,9 @@
 # springBootSample
 springBoot Sample code (jpa + hibernate)
 
-1 create database stock
-2 create table stock
+1. create database stock
+2. create table stock
+
 ```
 CREATE TABLE `stock` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
