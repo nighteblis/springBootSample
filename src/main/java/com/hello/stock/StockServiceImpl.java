@@ -20,5 +20,17 @@ public class StockServiceImpl {
 		return obj;
 	}
 	
+	public Stock updateStockById(int id , String stockName)
+	{
+		Stock obj = stockDao.getStockById(id);
+		
+		obj.setStockName(stockName);
+		
+		stockDao.updateStock(obj);
+		
+		return obj;
+		
+	}
+	
 
 }

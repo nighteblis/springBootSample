@@ -20,12 +20,13 @@ public class Stock {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-        private int id;  
+        private Integer id;  
 
         private String stockId;
 	
 
 	   private String stockName;
 	
+	   private Integer version;
 
 }

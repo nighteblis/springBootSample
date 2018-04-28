@@ -30,7 +30,14 @@ public class StockController {
 		
 	}
 	
+	@GetMapping("{id}/{stockName}")
+	public ResponseEntity<Stock> getStockById(@PathVariable("id") Integer id , @PathVariable("stockName") String stockName  )
 	
+	{
+		
+		Stock stock= stockService.updateStockById(id, stockName);
+		return new ResponseEntity<>(stock, HttpStatus.OK);
+	}	
 	
 	
 	
