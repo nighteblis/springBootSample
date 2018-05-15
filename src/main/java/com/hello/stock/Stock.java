@@ -4,7 +4,7 @@ import javax.persistence.Entity;
 
 import javax.persistence.Table;
 import com.hello.BaseModel;
-
+import javax.persistence.Version;
 import lombok.Data;
 
 
@@ -17,11 +17,10 @@ public class Stock extends BaseModel{
 	
 	private static final long serialVersionUID = 1L;
 	
-
         private String stockId;
-	
+
 
 	   private String stockName;
 	
-	
+
 }
