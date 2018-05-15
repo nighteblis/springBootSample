@@ -1,5 +1,7 @@
 package com.hello.stock;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +10,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -18,6 +22,15 @@ public class StockController {
 	
 	@Autowired
 	private StockServiceImpl stockService;
+	
+	@GetMapping("")
+	public ResponseEntity<List<Stock>> getStocks()
+	
+	{
+		logger.info("=========stock/id");
+		return new ResponseEntity<>(stockService.getStocks(), HttpStatus.OK);
+		
+	}
 	
 	
 	@GetMapping("{id}")
@@ -30,13 +43,14 @@ public class StockController {
 		
 	}
 	
-	@GetMapping("{id}/{stockName}")
-	public ResponseEntity<Stock> getStockById(@PathVariable("id") Integer id , @PathVariable("stockName") String stockName  )
+	@PostMapping(value = "{id}")
+	public ResponseEntity<Stock> updateStockById(@PathVariable("id") Integer id,@RequestBody Stock stock  )
 	
 	{
-		
-		Stock stock= stockService.updateStockById(id, stockName);
+		logger.info(stock.toString());		
+		stock = stockService.updateStockById(id, stock);		
 		return new ResponseEntity<>(stock, HttpStatus.OK);
+		
 	}	
 	
 	

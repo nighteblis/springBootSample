@@ -1,5 +1,5 @@
 package com.hello.stock;
 
-public class StockService {
+public interface StockService {
 
 }
