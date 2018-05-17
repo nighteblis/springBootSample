@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.domain.Sort;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.hello.common.exception.Assert;
 import com.hello.model.BaseModel;
@@ -18,6 +19,7 @@ public abstract class BaseServiceImpl<T extends BaseModel, R extends BaseReposit
 
     protected abstract void setRepository(R repository);
 
+    @Transactional
     protected   T save(T entity) {
         Assert.notNull(entity, "对象");
 
@@ -29,6 +31,7 @@ public abstract class BaseServiceImpl<T extends BaseModel, R extends BaseReposit
         return repository.save(entity);
     }
 
+    @Transactional
     protected  T update(T entity) {
         Assert.notNull(entity, "对象");
         Assert.notNull(entity.getId(), "主键");

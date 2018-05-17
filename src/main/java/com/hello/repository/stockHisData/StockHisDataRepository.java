@@ -14,7 +14,7 @@ import com.hello.repository.BaseRepository;
  *
  */
 
-@Transactional
+
 public interface StockHisDataRepository extends BaseRepository<StockHisData>{
 	
 	

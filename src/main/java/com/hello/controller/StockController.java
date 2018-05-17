@@ -13,12 +13,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hello.model.Stock;
 import com.hello.service.impl.StockServiceImpl;
 
 @Controller
-@RequestMapping("stock")
+@RequestMapping("/stock")
 public class StockController {
 	
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -26,17 +28,21 @@ public class StockController {
 	@Autowired
 	private StockServiceImpl stockService;
 	
+
+
 	@GetMapping("")
-	public ResponseEntity<List<Stock>> getStocks()
+	@ResponseBody
+	public ResponseEntity<List<Stock>> getStocks(@RequestParam(value="page",required=false) String page , @RequestParam(value="size",required=false) String size)
 	
 	{
-		logger.info("=========stock/id");
-		return new ResponseEntity<>(stockService.getStocks(), HttpStatus.OK);
+		
+			return new ResponseEntity<>(stockService.getStocks(page,size), HttpStatus.OK);		
 		
 	}
 	
 	
-	@GetMapping("{id}")
+	@GetMapping("/{id}")
+	@ResponseBody
 	public ResponseEntity<Stock> getStockById(@PathVariable("id") Long id)
 	
 	{
@@ -46,7 +52,8 @@ public class StockController {
 		
 	}
 	
-	@PostMapping(value = "{id}")
+	@PostMapping(value = "/{id}")
+	@ResponseBody
 	public ResponseEntity<Stock> updateStockById(@PathVariable("id") Long id,@RequestBody Stock stock  )
 	
 	{
