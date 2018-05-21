@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.hello.common.utils.MyBeanUtils;
 import com.hello.model.Stock;
@@ -40,6 +41,27 @@ public class StockServiceImpl extends BaseServiceImpl<Stock, StockRepository> im
 		return obj;
 	}
 	
+	
+	public Stock getStockByStockId(int stockId)
+	{
+		
+		Stock obj = repository.findByStockId(stockId);
+		
+		return obj;
+		
+	}
+	
+	
+	public boolean isExistByStockId(int stockId)
+	{
+		
+		Stock obj = repository.findByStockId(stockId);
+		
+		if(null != obj) return true;
+		
+		return false;
+		
+	}
 
 	
 	
@@ -51,10 +73,7 @@ public class StockServiceImpl extends BaseServiceImpl<Stock, StockRepository> im
 			pageNumber = "0";
 			pageSize = "10";
 		}
-		
-		
-
-		
+				
 		Pageable page = new PageRequest(Integer.valueOf(pageNumber),Integer.valueOf(pageSize));		
 		return repository.findAll(page).getContent();
 	
@@ -67,8 +86,7 @@ public class StockServiceImpl extends BaseServiceImpl<Stock, StockRepository> im
 		Stock originalStock = this.get(id);		
 		MyBeanUtils.copyProperties(stock, originalStock,MyBeanUtils.getNullPropertyNames(stock));		
 		logger.info(stock.toString());
-		logger.info(originalStock.toString());		
-		
+		logger.info(originalStock.toString());				
 		this.save(originalStock);
 		//stockDao.updateStock(originalStock);	
 		return originalStock;		

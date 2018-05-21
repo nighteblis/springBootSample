@@ -27,6 +27,8 @@ import com.hello.repository.BaseRepository;
  */
 
 public interface StockRepository extends BaseRepository<Stock>{
+
+	Stock findByStockId(int stockId);
 	
 	
 }
